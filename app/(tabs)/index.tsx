@@ -34,7 +34,7 @@ export default function HomeScreen() {
 
     try {
       const response = await fetch(
-        "https://stirred-prawn-main.ngrok-free.app/upload/",
+        "https://devoted-tidy-moth.ngrok-free.app/upload/",
         {
           method: "POST",
           headers: {

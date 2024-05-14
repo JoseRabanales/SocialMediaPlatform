@@ -26,7 +26,7 @@ interface Item {
 // const fileData: Item[] = [
 //   {
 //     id: 1
-//     fileUri: "https://stirred-prawn-main.ngrok-free.app/files/3",
+//     fileUri: "https://devoted-tidy-moth.ngrok-free.app/files/3",
 //     name: "Image",
 //     likes: 2,
 //     disLikes: 3,
@@ -99,7 +99,7 @@ export default function TabTwoScreen() {
     setFetching(true);
     try {
       const response = await fetch(
-        "https://stirred-prawn-main.ngrok-free.app/files",
+        "https://devoted-tidy-moth.ngrok-free.app/files",
         {
           method: "GET",
           headers: {
@@ -140,7 +140,7 @@ export default function TabTwoScreen() {
               setModalVisible(true);
               setViewFile({
                 name: file.name,
-                uri: `https://stirred-prawn-main.ngrok-free.app/file/${file.id}`,
+                uri: `https://devoted-tidy-moth.ngrok-free.app/file/${file.id}`,
                 type: file.type,
               });
             }}
