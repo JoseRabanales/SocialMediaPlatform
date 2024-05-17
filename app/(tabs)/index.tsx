@@ -30,11 +30,11 @@ export default function HomeScreen() {
         Platform.OS === "ios"
           ? fileData.uri.replace("file://", "")
           : fileData.uri,
-    });
+    } as any);
 
     try {
       const response = await fetch(
-        "https://devoted-tidy-moth.ngrok-free.app/upload/",
+        "https://main-monster-decent.ngrok-free.app/upload/",
         {
           method: "POST",
           headers: {

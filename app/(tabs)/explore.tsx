@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/AntDesign";
-import { Image, StyleSheet, Platform, View, Text } from "react-native";
+import { Image, StyleSheet, Platform, View, Text, Button } from "react-native";
 
 import { Collapsible } from "@/components/Collapsible";
 import { ExternalLink } from "@/components/ExternalLink";
@@ -26,7 +26,7 @@ interface Item {
 // const fileData: Item[] = [
 //   {
 //     id: 1
-//     fileUri: "https://devoted-tidy-moth.ngrok-free.app/files/3",
+//     fileUri: "https://main-monster-decent.ngrok-free.app/files/3",
 //     name: "Image",
 //     likes: 2,
 //     disLikes: 3,
@@ -78,15 +78,18 @@ export default function TabTwoScreen() {
 
     if (fileData.type.startsWith("video/")) {
       return (
-        <Video
-          source={{ uri: fileData.uri }}
-          rate={1.0}
-          volume={1.0}
-          isMuted={false}
-          shouldPlay={true}
-          useNativeControls={true}
-          style={styles.view}
-        />
+        <View style={styles.container}>
+            <Video
+            source={{ uri: fileData.uri }}
+            rate={1.0}
+            volume={1.0}
+            isMuted={false}
+            shouldPlay={true}
+            useNativeControls={true}
+            style={styles.view}
+          />
+        </View>
+        
       ); // Assuming Video is a component for rendering videos
     }
 
@@ -99,7 +102,7 @@ export default function TabTwoScreen() {
     setFetching(true);
     try {
       const response = await fetch(
-        "https://devoted-tidy-moth.ngrok-free.app/files",
+        "https://main-monster-decent.ngrok-free.app/files",
         {
           method: "GET",
           headers: {
@@ -140,7 +143,7 @@ export default function TabTwoScreen() {
               setModalVisible(true);
               setViewFile({
                 name: file.name,
-                uri: `https://devoted-tidy-moth.ngrok-free.app/file/${file.id}`,
+                uri: `https://main-monster-decent.ngrok-free.app/file/${file.id}`,
                 type: file.type,
               });
             }}
@@ -200,16 +203,20 @@ export default function TabTwoScreen() {
         <ThemedText type="title">Medias</ThemedText>
       </ThemedView>
       <ThemedText>You can find posted medias here.</ThemedText>
+      <Button title="Reload Archives" onPress={()=>{fetchFiles()}}/>
       {fetching && <ThemedText>Loading...</ThemedText>}
       {fileData.map((item, index) => (
         <ListItem key={index} file={item} />
       ))}
+      
       <View style={styles.container}>
+       
         <Modal
           visible={modalVisible}
           transparent={false}
           onRequestClose={() => setModalVisible(false)}
         >
+    
           <TouchableOpacity
             style={styles.fullScreenContainer}
             onPress={() => setModalVisible(false)}
@@ -254,12 +261,9 @@ const styles = StyleSheet.create({
     resizeMode: "contain", // For images, maintain aspect ratio
   },
   view: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    resizeMode: "contain",
+    width:"100%",
+    aspectRatio: 16/9,
+    resizeMode: "contain"
   },
   listItem: {
     flexDirection: "row", // Lays out children in a horizontal line.
@@ -269,6 +273,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    justifyContent: 'center', // Centra verticalmente
+    alignItems: 'center',
+    padding:20
   },
   thumbnail: {
     width: 100,
